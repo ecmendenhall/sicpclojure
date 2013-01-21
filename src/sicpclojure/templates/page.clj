@@ -1,12 +1,9 @@
 (ns sicpclojure.templates.page
   (:require [hiccup.core :refer [html]])
   (:require [hiccup.page :refer [html5]])
-  (:use [sicpclojure.core :exclude [config]])
   (:use [sicpclojure.templates.base :exclude [render]]))
 
-(def content (get-page "resources/text/10.md"))
-
-(defn render [] 
+(defn render [content] 
   (html5
    (let [title (head :title)
          js    (head :js)

@@ -1,8 +1,7 @@
 (ns sicpclojure.templates.base
   (:require [hiccup.core :refer [html]])
   (:require [hiccup.page :refer [html5, include-js, include-css]])
-  (:require [clojure.string :as string])
-  (:use [sicpclojure.core :exclude [config]]))
+  (:require [clojure.string :as string]))
 
 (def config {:js    ["require.js"]
              :css   ["style.css"
@@ -10,7 +9,7 @@
              :fonts [["Lora" 
                        :size [400 700]]
                      ["Ubuntu Mono"]]
-             :font-url "http://fonts.googleapis.com/css?family="
+             :font-url "http://fonts.googleapis.com/css?family="})
 
 (defn include-font [font]
   (let [font-name (string/replace (first font) " " "+")
