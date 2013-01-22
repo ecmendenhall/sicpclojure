@@ -3,6 +3,8 @@
   (:require [sicpclojure.templates.cover :as cover-template])
   (:require [clojure.string :as string])
   (:require [hickory.core :refer [as-hiccup parse]])
+  (:require [hickory.zip :refer [hiccup-zip]])
+  (:require [clojure.zip :as zip])
   (:require [clojure.java.io :as io])
   (:require [fs.core :as fs])
   (:import [org.pegdown PegDownProcessor Extensions]))
@@ -11,7 +13,7 @@
              :path-to-text "resources/text/"
              :deploy-directory "deploy/"
              :ignore #{".scss"}
-             :complete ["10.md" "11.md" "12.md"]})
+             :complete [10 11 12]})
 
 (defn get-page 
   ""
@@ -50,16 +52,19 @@
 (defn deploy
   ""
   []
-  ;; If deploy directory doesn't exist, create it.
-  (when-not (fs/exists? (config :deploy-directory))
-    (fs/mkdir (config :deploy-directory)))
+  (defn get-or-mkdir [dir]
+    (when-not (fs/exists? dir)
+      (fs/mkdir dir))
+    dir)
 
+  ;; If deploy directory doesn't exist, create it.
   ;; Copy resources/static to deploy
-  (fs/copy-dir "resources/static" (config :deploy-directory))
+  (fs/copy-dir "resources/static" 
+               (get-or-mkdir (config :deploy-directory)))
   
   ;; Remove files in config :ignore
   (defn clean-up [dir]
-    (defn remove-ignored [file]
+    (defn remove-ignored [file]    
       (when (contains? (config :ignore) (fs/extension file))
         (fs/delete file)))
     (defn get-files [root _ files]
@@ -68,8 +73,25 @@
 
   (clean-up (str (config :deploy-directory) "static"))
   
-  (map (fn [page] (spit (str page ".html")
-                        (page-template/render 
-                          (get-page (str (config :path-to-text)
-                                         page)))))
-       (config :complete)))
+  (spit (str (config :deploy-directory)
+             "index.html")
+        (cover-template/render))
+
+  (defn render-and-spit [page]
+    (let [page-dir (get-or-mkdir (str (config :deploy-directory)
+                                      "pages"))]
+      (spit (str page-dir "/" page ".html")
+            (page-template/render (get-page (str (config :path-to-text)
+                                                 page
+                                                 ".md"))))))
+
+  (map render-and-spit (config :complete)))
+
+(defn get-headers [page]
+  (map (fn [el] [(first el) (last (last el))]) 
+       (filter (fn [el] (contains? #{:h1 :h2 :h3 :h4} (first el))) 
+               (-> (hiccup-zip (get-page page))
+                   zip/next
+                   zip/next
+                   zip/next 
+                   zip/children))))

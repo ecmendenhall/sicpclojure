@@ -1,7 +1,9 @@
 (ns sicpclojure.templates.page
   (:require [hiccup.core :refer [html]])
   (:require [hiccup.page :refer [html5]])
-  (:use [sicpclojure.templates.base :exclude [render]]))
+  (:use [sicpclojure.templates.base :exclude [render head]]))
+
+(def head (make-head "../static/"))
 
 (defn render [content] 
   (html5

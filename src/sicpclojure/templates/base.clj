@@ -3,13 +3,13 @@
   (:require [hiccup.page :refer [html5, include-js, include-css]])
   (:require [clojure.string :as string]))
 
-(def config {:js    ["require.js"]
-             :css   ["style.css"
+(def config {:css   ["style.css"
                      "solarized_light.css"]
              :fonts [["Lora" 
                        :size [400 700]]
                      ["Ubuntu Mono"]]
-             :font-url "http://fonts.googleapis.com/css?family="})
+             :font-url "http://fonts.googleapis.com/css?family="
+             :static-dir "static/"})
 
 (defn include-font [font]
   (let [font-name (string/replace (first font) " " "+")
@@ -20,21 +20,27 @@
                                 (str ":"
                                      (string/join "," font-sizes)))))))
 
-(defn include-local [file include-fn]
+(defn include-local [file static-dir include-fn]
   (let [filetype (second (re-find #"\.([0-9a-z]+)$" file))]
-  (include-fn (str (str filetype "/")
+  (include-fn (str static-dir
+                   filetype 
+                   "/"
                    file))))
 
 (defn include-link [file include-fn]
   (include-fn file))
 
-(def head {:title [:title "SICP in Clojure"]
-           :js    (map (fn [file] (include-local file include-js)) 
-                       (config :js))
-           :css   (map (fn [file] (include-local file include-css)) 
+(defn make-head [static-dir]
+  {:title [:title "SICP in Clojure"]
+           :js    [:script {:data-main (str static-dir "js/main")
+                            :type "text/javascript"
+                            :src (str static-dir "js/require.js")}]
+           :css   (map (fn [file] (include-local file static-dir include-css)) 
                        (config :css))
            :fonts (map (fn [file] (include-link file include-font)) 
                        (config :fonts))})
+
+(def head (make-head (config :static-dir)))
 
 (def header
   (html 
