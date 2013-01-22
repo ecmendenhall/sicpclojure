@@ -34,7 +34,6 @@
     (let [code-block-regex #"\{\{\s*([a-zA-Z0-9]+(?:[\.|-][a-zA-Z0-9]+)*\.clj)\s*\}\}"]
       (string/replace markdown code-block-regex get-code)))
 
-
   (defn markdown-to-html 
     ""
     [markdown]
@@ -88,10 +87,28 @@
   (map render-and-spit (config :complete)))
 
 (defn get-headers [page]
-  (map (fn [el] [(first el) (last (last el))]) 
+  (map (fn [el] [(first el) 
+                 (string/join (filter string?
+                                      (flatten (rest el))))])
        (filter (fn [el] (contains? #{:h1 :h2 :h3 :h4} (first el))) 
                (-> (hiccup-zip (get-page page))
                    zip/next
                    zip/next
                    zip/next 
                    zip/children))))
+
+(defn add-header-ids [page]
+  (defn zip-through [zipper]
+    (let [el (zip/node zipper)]
+      (cond 
+        (contains? #{:h1 :h2 :h3} (first el))
+          (let [section-id (second 
+                             (string/split (:href (second (nth el 2))) 
+                                           #"#"))]
+            (recur (zip/next (zip/replace zipper (assoc-in el [1] {:id section-id})))))
+        (zip/end? zipper)
+          zipper
+        :else
+          (recur (zip/next zipper)))))
+  (let [page-zipper (hiccup-zip (get-page page))]
+    (zip-through page-zipper)))
