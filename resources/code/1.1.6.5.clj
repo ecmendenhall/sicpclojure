@@ -1,1 +1,1 @@
-(if <predicate> <consequent> <alternative>)
+(if <-predicate-> <-consequent-> <-alternative->)
