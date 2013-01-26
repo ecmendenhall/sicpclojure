@@ -1,4 +1,5 @@
 (ns sicpclojure.core
+  (:require [sicpclojure.config :as config])
   (:require [sicpclojure.templates.page :as page-template])
   (:require [sicpclojure.templates.cover :as cover-template])
   (:require [clojure.string :as string])
@@ -9,11 +10,6 @@
   (:require [fs.core :as fs])
   (:import [org.pegdown PegDownProcessor Extensions]))
 
-(def config {:path-to-code "resources/code/"
-             :path-to-text "resources/text/"
-             :deploy-directory "deploy/"
-             :ignore #{".scss"}
-             :complete [10 11 12]})
 
 (defn get-page 
   ""
@@ -27,7 +23,7 @@
       ""
       [template-match]
       (str "```clojure\n"
-           (slurp (str (config :path-to-code) 
+           (slurp (str (config/build :path-to-code) 
                        (second template-match)))
            "```"))
 
@@ -41,14 +37,31 @@
                     (reduce bit-or [(. Extensions FENCED_CODE_BLOCKS)]))]
       (.markdownToHtml processor markdown)))
 
+  (defn add-header-ids [page]
+    (defn zip-through [zipper]
+      (let [el (zip/node zipper)]
+        (cond 
+          (contains? #{:h1 :h2 :h3} (first el))
+            (let [section-id (second 
+                               (string/split (:href (second (nth el 2))) 
+                                             #"#"))]
+              (recur (zip/next (zip/replace zipper (assoc-in el [1] {:id section-id})))))
+          (zip/end? zipper)
+            (list (first (zip/root zipper)))
+          :else
+            (recur (zip/next zipper)))))
+    (let [page-zipper (hiccup-zip page)]
+      (zip-through page-zipper)))
+
   (->> page 
        (slurp)
        (insert-code-blocks)
        (markdown-to-html)
        (parse)
-       (as-hiccup)))
+       (as-hiccup)
+       (add-header-ids)))
 
-(defn deploy
+(defn deploy!
   ""
   []
   (defn get-or-mkdir [dir]
@@ -59,32 +72,33 @@
   ;; If deploy directory doesn't exist, create it.
   ;; Copy resources/static to deploy
   (fs/copy-dir "resources/static" 
-               (get-or-mkdir (config :deploy-directory)))
+               (get-or-mkdir (config/build :deploy-directory)))
   
   ;; Remove files in config :ignore
   (defn clean-up [dir]
     (defn remove-ignored [file]    
-      (when (contains? (config :ignore) (fs/extension file))
+      (when (contains? (config/build :ignore) (fs/extension file))
         (fs/delete file)))
     (defn get-files [root _ files]
       (map (fn [file] (str (.getPath root) "/" file)) files))
     (map remove-ignored (flatten (fs/walk get-files dir))))
 
-  (clean-up (str (config :deploy-directory) "static"))
+  (clean-up (str (config/build :deploy-directory) "static"))
   
-  (spit (str (config :deploy-directory)
+  (spit (str (config/build :deploy-directory)
              "index.html")
         (cover-template/render))
 
   (defn render-and-spit [page]
-    (let [page-dir (get-or-mkdir (str (config :deploy-directory)
+    (let [page-dir (get-or-mkdir (str (config/build :deploy-directory)
                                       "pages"))]
       (spit (str page-dir "/" page ".html")
-            (page-template/render (get-page (str (config :path-to-text)
+            (page-template/render (get-page (str (config/build :path-to-text)
                                                  page
-                                                 ".md"))))))
+                                                 ".md"))
+                                  page))))
 
-  (map render-and-spit (config :complete)))
+  (map render-and-spit (config/build :complete)))
 
 (defn get-headers [page]
   (map (fn [el] [(first el) 
@@ -96,19 +110,3 @@
                    zip/next
                    zip/next 
                    zip/children))))
-
-(defn add-header-ids [page]
-  (defn zip-through [zipper]
-    (let [el (zip/node zipper)]
-      (cond 
-        (contains? #{:h1 :h2 :h3} (first el))
-          (let [section-id (second 
-                             (string/split (:href (second (nth el 2))) 
-                                           #"#"))]
-            (recur (zip/next (zip/replace zipper (assoc-in el [1] {:id section-id})))))
-        (zip/end? zipper)
-          zipper
-        :else
-          (recur (zip/next zipper)))))
-  (let [page-zipper (hiccup-zip (get-page page))]
-    (zip-through page-zipper)))

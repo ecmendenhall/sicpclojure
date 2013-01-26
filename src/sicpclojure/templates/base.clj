@@ -1,20 +1,13 @@
 (ns sicpclojure.templates.base
+  (:require [sicpclojure.config :as config])
   (:require [hiccup.core :refer [html]])
   (:require [hiccup.page :refer [html5, include-js, include-css]])
   (:require [clojure.string :as string]))
 
-(def config {:css   ["style.css"
-                     "solarized_light.css"]
-             :fonts [["Lora" 
-                       :size [400 700]]
-                     ["Ubuntu Mono"]]
-             :font-url "http://fonts.googleapis.com/css?family="
-             :static-dir "static/"})
-
 (defn include-font [font]
   (let [font-name (string/replace (first font) " " "+")
         font-sizes (second (rest font))]
-    (include-css (str (config :font-url)
+    (include-css (str (config/templates :font-url)
                               font-name
                               (when font-sizes
                                 (str ":"
@@ -36,15 +29,15 @@
                             :type "text/javascript"
                             :src (str static-dir "js/require.js")}]
            :css   (map (fn [file] (include-local file static-dir include-css)) 
-                       (config :css))
+                       (config/templates :css))
            :fonts (map (fn [file] (include-link file include-font)) 
-                       (config :fonts))})
+                       (config/templates :fonts))})
 
-(def head (make-head (config :static-dir)))
+(def head (make-head (config/templates :static-dir)))
 
 (def header
   (html 
-    [:p "Prev | Next"]
+    [:p "<Prev  Next>"]
     [:p "+ Contents"]
     [:p "Dark"]))
 

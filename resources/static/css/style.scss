@@ -34,21 +34,21 @@ html, .light { @include rebase($base3,$base2,$base1,$base0,$base00,$base01,$base
 .dark  {
     @include rebase($base03,$base02,$base01,$base00,$base0,$base1,$base2,$base3)
 }
-.dark { @include accentize($cyan, $yellow); }
+.dark { @include accentize($yellow, $cyan); }
 html * {
     @include accentize($red, $blue);
     color-profile: sRGB;
     rendering-intent: auto;
 }
 body {
-    font-family: 'Lora', serif;
+    font-family: 'Lora', 'Georgia', serif;
     font-size: 14pt;
     }
 h1, h2, h3 {
     font-weight: 800;
 }
 code {
-    font-family: 'Ubuntu Mono', monospace;
+    font-family: 'Ubuntu Mono', 'Monaco', monospace;
     }
 .title  h1 { font-size: 400%; }
 .quote { margin-bottom: 3em; }

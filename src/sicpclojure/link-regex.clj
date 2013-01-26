@@ -11,4 +11,8 @@
 
  (let [link-regex #"\(book-Z-H-(([0-9]\.html)#(sec_[0-9]+(:?\.[0-9])*))\)"
        page-text (slurp page)]
-   (spit page (string/replace page-text link-regex replace-links))))
+   (spit page (string/replace page-text
+                              link-regex 
+                              replace-links))))
+
+(map fix-links! (map (fn [n] (str "resources/text/" n ".md")) (range 9 39))
