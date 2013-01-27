@@ -6,7 +6,7 @@
 (def header
   (html 
     [:p "+ Contents"]
-    [:p "Dark"]))
+    [:p#colorscheme ]))
 
 (def content
   (html

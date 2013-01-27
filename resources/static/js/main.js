@@ -2,5 +2,9 @@ require(["http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HT
 );
 
 require(["highlight.pack"], function(hljs) {
-    hljs.initHighlightingOnLoad();
+    hljs.initHighlighting();
+});
+
+require(["colorscheme"], function(colorscheme) {
+    colorscheme.getColorPreference();
 });

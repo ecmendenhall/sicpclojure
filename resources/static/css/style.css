@@ -43,14 +43,14 @@ html * {
     color: #268bd2; }
 
 body {
-  font-family: "Lora", serif;
+  font-family: "Lora", "Georgia", serif;
   font-size: 14pt; }
 
 h1, h2, h3 {
   font-weight: 800; }
 
 code {
-  font-family: "Ubuntu Mono", monospace; }
+  font-family: "Ubuntu Mono", "Monaco", monospace; }
 
 .title h1 {
   font-size: 400%; }
@@ -70,3 +70,7 @@ header {
   padding-left: 5%;
   margin-right: 10%;
   position: relative; }
+
+#colorscheme {
+  cursor: pointer;
+  text-decoratioN: underline; }

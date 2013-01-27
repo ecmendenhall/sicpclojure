@@ -39,7 +39,7 @@
   (html 
     [:p "<Prev  Next>"]
     [:p "+ Contents"]
-    [:p "Dark"]))
+    [:p#colorscheme ]))
 
 (defn render [] 
   (html5

@@ -34,7 +34,7 @@ html, .light { @include rebase($base3,$base2,$base1,$base0,$base00,$base01,$base
 .dark  {
     @include rebase($base03,$base02,$base01,$base00,$base0,$base1,$base2,$base3)
 }
-.dark { @include accentize($yellow, $cyan); }
+.dark { @include accentize($cyan, $yellow); }
 html * {
     @include accentize($red, $blue);
     color-profile: sRGB;
@@ -64,4 +64,8 @@ header {
     padding-left: 5%;
     margin-right: 10%;
     position: relative;
+}
+#colorscheme {
+    cursor: pointer;
+    text-decoratioN: underline;
 }

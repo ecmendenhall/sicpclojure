@@ -19,13 +19,7 @@
       " | "
       (when next-page [:a {:href next-page} "Next"])]
      [:p "+ Contents"]
-     [:p "Dark"]]))
-
-(def header
-  (html 
-    [:p "Prev  Next"]
-    [:p "+ Contents"]
-    [:p "Dark"]))
+     [:p#colorscheme ]]))
 
 (defn render [content page] 
   (html5
