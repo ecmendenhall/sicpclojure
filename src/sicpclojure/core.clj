@@ -104,9 +104,17 @@
                          zip/next 
                          zip/children))))
 
-      [:ul (map (fn [i] [:li 
-                         {:class (string/join (take-last 2 (str (first i))))} 
-                         (last i)])
+      (defn make-li [header]
+        (let [section-regex #"[0-9](?:\.[0-9])*"
+              header-type (first header)
+              header-text (last header)]
+          [:li {:class (string/join (take-last 2 (str header-type)))} 
+               [:a {:href (str page 
+                               ".html#sec_" 
+                               (re-find section-regex header-text))}
+                   header-text]]))
+
+      [:ul (map make-li
                 (get-headers page))])
 
   (defn make-contents [pages]

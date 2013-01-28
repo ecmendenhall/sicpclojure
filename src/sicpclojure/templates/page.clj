@@ -18,6 +18,7 @@
       [:a {:href prev-page} "Prev"]
       " | "
       (when next-page [:a {:href next-page} "Next"])]
+     [:p [:a {:href "contents.html"} "Contents"]]
      [:p contents]
      [:p#colorscheme ]]))
 
