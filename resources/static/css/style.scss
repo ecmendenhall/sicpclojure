@@ -53,19 +53,50 @@ code {
 .title  h1 { font-size: 400%; }
 .quote { margin-bottom: 3em; }
 header {
-    width: 180px;
+    width: 300px;
     position: fixed;
     top: 0;
     bottom: 0;
     padding: 40px;
 }
+header > ul {
+    list-style-type: none;
+    padding-left: 0px;
+}
 .content {
-    margin-left: 220px;
+    margin-left: 300px;
+    padding-top: 40px;
     padding-left: 5%;
     margin-right: 10%;
     position: relative;
 }
+.h1 {
+    font-size: 14pt;
+}
+.h2 {
+    font-size: 12pt;
+    padding-left: 10px;
+    padding-top: 5px;
+}
+.h3 {
+    font-size: 10pt;
+    padding-left: 20px;
+    padding-top: 5px;
+}
 #colorscheme {
     cursor: pointer;
     text-decoratioN: underline;
+}
+#toc .h1 {
+    font-size: 18pt;
+}
+#toc .h2 {
+    font-size: 16pt;
+}
+#toc .h3 {
+    font-size: 14pt;
+}
+#toc > ul {
+    list-style-type: none;
+    padding-left: 0px;
 }

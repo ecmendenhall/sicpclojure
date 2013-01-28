@@ -36,7 +36,7 @@
 
 (def head (make-head (config/templates :static-dir)))
 
-(defn render [contents] 
+(defn render [contents content] 
   (html5
    (let [title (head :title)
          js    (head :js)
@@ -52,4 +52,4 @@
        [:p "<Prev  Next>"]
        [:p contents]
        [:p#colorscheme]]
-      [:div.content]]))
+      [:div.content content]]))

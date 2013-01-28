@@ -1,5 +1,6 @@
 (ns sicpclojure.core
   (:require [sicpclojure.config :as config])
+  (:require [sicpclojure.templates.contents :as contents-template])
   (:require [sicpclojure.templates.page :as page-template])
   (:require [sicpclojure.templates.cover :as cover-template])
   (:require [clojure.zip :as zip])
@@ -8,6 +9,7 @@
   (:require [hickory.core :refer [as-hiccup parse]])
   (:require [hickory.zip :refer [hiccup-zip]])
   (:require [fs.core :as fs])
+  (:require [watchtower.core :as wt])
   (:import [org.pegdown PegDownProcessor Extensions]))
 
 (defn page-path [page]
@@ -88,15 +90,14 @@
     (map remove-ignored (flatten (fs/walk get-files dir))))
 
   (clean-up (str (config/build :deploy-directory) "static"))
-
-  (defn make-contents [pages]
-    (defn make-contents-list [page]
+  
+  (defn make-page-contents [page]
 
       (defn get-headers [page]
         (map (fn [el] [(first el) 
                        (string/join (filter string?
                                             (flatten (rest el))))])
-             (filter (fn [el] (contains? #{:h1 :h2 :h3 :h4} (first el))) 
+             (filter (fn [el] (contains? #{:h1 :h2 :h3} (first el))) 
                      (-> (hiccup-zip (get-page (page-path page)))
                          zip/next
                          zip/next
@@ -108,20 +109,32 @@
                          (last i)])
                 (get-headers page))])
 
-    (map make-contents-list pages))
+  (defn make-contents [pages]
+    (map make-page-contents pages))
 
-  (let [contents (make-contents (config/build :complete))]
-  
   (spit (str (config/build :deploy-directory)
              "index.html")
-        (cover-template/render contents))
+        (cover-template/render))
+
+  (spit (str (get-or-mkdir (str (config/build :deploy-directory)
+                                "pages"))
+             "/contents.html")
+        (contents-template/render (make-contents (config/build :complete))))
 
   (defn render-and-spit [page]
     (let [page-dir (get-or-mkdir (str (config/build :deploy-directory)
                                       "pages"))]
       (spit (str page-dir "/" page ".html")
-            (page-template/render contents
+            (page-template/render (make-page-contents page)
                                   (get-page (page-path page))
-                                  page)))))
+                                  page))))
 
   (map render-and-spit (config/build :complete)))
+
+(defn watch [directories]
+  (wt/watcher directories
+           (wt/rate 50)
+           (wt/file-filter (wt/extensions :js :css :png))
+           (wt/on-change (fn [f] (println "File changed: " f)
+                                 (println "Deploying!")
+                                 (deploy!)))))

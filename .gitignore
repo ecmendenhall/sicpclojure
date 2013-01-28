@@ -2,6 +2,7 @@
 /lib
 /classes
 /checkouts
+/static/css/.sass-cache
 pom.xml
 *.jar
 *.class

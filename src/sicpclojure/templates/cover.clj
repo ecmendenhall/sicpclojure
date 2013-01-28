@@ -11,7 +11,7 @@
       [:h1 "&#8220;I personally don't think SICP will help you much with Clojure. YMMV.&#8221;"]
       [:p "&#8212;Rich Hickey, author, Clojure programming language"]]))
 
-(defn render [contents] 
+(defn render [] 
   (html5
    (let [title (head :title)
          js    (head :js)
@@ -24,6 +24,6 @@
        fonts])
     [:body
       [:header
-       [:p contents]
+       [:p [:a {:href "pages/contents.html"} "Contents"]]
        [:p#colorscheme ]]
       [:div.content content]]))
