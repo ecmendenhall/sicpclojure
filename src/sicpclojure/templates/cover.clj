@@ -1,12 +1,7 @@
 (ns sicpclojure.templates.cover
   (:require [hiccup.core :refer [html]])
   (:require [hiccup.page :refer [html5]])
-  (:use [sicpclojure.templates.base :exclude [header render]]))
-
-(def header
-  (html 
-    [:p "+ Contents"]
-    [:p#colorscheme ]))
+  (:use [sicpclojure.templates.base :exclude [render]]))
 
 (def content
   (html
@@ -16,7 +11,7 @@
       [:h1 "&#8220;I personally don't think SICP will help you much with Clojure. YMMV.&#8221;"]
       [:p "&#8212;Rich Hickey, author, Clojure programming language"]]))
 
-(defn render [] 
+(defn render [contents] 
   (html5
    (let [title (head :title)
          js    (head :js)
@@ -28,5 +23,7 @@
        css
        fonts])
     [:body
-      [:header header]
+      [:header
+       [:p contents]
+       [:p#colorscheme ]]
       [:div.content content]]))

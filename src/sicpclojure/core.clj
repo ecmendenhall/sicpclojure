@@ -2,14 +2,18 @@
   (:require [sicpclojure.config :as config])
   (:require [sicpclojure.templates.page :as page-template])
   (:require [sicpclojure.templates.cover :as cover-template])
+  (:require [clojure.zip :as zip])
+  (:require [clojure.java.io :as io])
   (:require [clojure.string :as string])
   (:require [hickory.core :refer [as-hiccup parse]])
   (:require [hickory.zip :refer [hiccup-zip]])
-  (:require [clojure.zip :as zip])
-  (:require [clojure.java.io :as io])
   (:require [fs.core :as fs])
   (:import [org.pegdown PegDownProcessor Extensions]))
 
+(defn page-path [page]
+  (str (config/build :path-to-text)
+       page
+       ".md"))
 
 (defn get-page 
   ""
@@ -84,29 +88,40 @@
     (map remove-ignored (flatten (fs/walk get-files dir))))
 
   (clean-up (str (config/build :deploy-directory) "static"))
+
+  (defn make-contents [pages]
+    (defn make-contents-list [page]
+
+      (defn get-headers [page]
+        (map (fn [el] [(first el) 
+                       (string/join (filter string?
+                                            (flatten (rest el))))])
+             (filter (fn [el] (contains? #{:h1 :h2 :h3 :h4} (first el))) 
+                     (-> (hiccup-zip (get-page (page-path page)))
+                         zip/next
+                         zip/next
+                         zip/next 
+                         zip/children))))
+
+      [:ul (map (fn [i] [:li 
+                         {:class (string/join (take-last 2 (str (first i))))} 
+                         (last i)])
+                (get-headers page))])
+
+    (map make-contents-list pages))
+
+  (let [contents (make-contents (config/build :complete))]
   
   (spit (str (config/build :deploy-directory)
              "index.html")
-        (cover-template/render))
+        (cover-template/render contents))
 
   (defn render-and-spit [page]
     (let [page-dir (get-or-mkdir (str (config/build :deploy-directory)
                                       "pages"))]
       (spit (str page-dir "/" page ".html")
-            (page-template/render (get-page (str (config/build :path-to-text)
-                                                 page
-                                                 ".md"))
-                                  page))))
+            (page-template/render contents
+                                  (get-page (page-path page))
+                                  page)))))
 
   (map render-and-spit (config/build :complete)))
-
-(defn get-headers [page]
-  (map (fn [el] [(first el) 
-                 (string/join (filter string?
-                                      (flatten (rest el))))])
-       (filter (fn [el] (contains? #{:h1 :h2 :h3 :h4} (first el))) 
-               (-> (hiccup-zip (get-page page))
-                   zip/next
-                   zip/next
-                   zip/next 
-                   zip/children))))

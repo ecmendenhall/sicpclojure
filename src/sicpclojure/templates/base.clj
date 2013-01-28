@@ -2,7 +2,8 @@
   (:require [sicpclojure.config :as config])
   (:require [hiccup.core :refer [html]])
   (:require [hiccup.page :refer [html5, include-js, include-css]])
-  (:require [clojure.string :as string]))
+  (:require [clojure.string :as string])
+  (:require [clojure.zip :as zip]))
 
 (defn include-font [font]
   (let [font-name (string/replace (first font) " " "+")
@@ -35,13 +36,7 @@
 
 (def head (make-head (config/templates :static-dir)))
 
-(def header
-  (html 
-    [:p "<Prev  Next>"]
-    [:p "+ Contents"]
-    [:p#colorscheme ]))
-
-(defn render [] 
+(defn render [contents] 
   (html5
    (let [title (head :title)
          js    (head :js)
@@ -53,5 +48,8 @@
        css
        fonts])
     [:body
-      [:header header]
+      [:header 
+       [:p "<Prev  Next>"]
+       [:p contents]
+       [:p#colorscheme]]
       [:div.content]]))

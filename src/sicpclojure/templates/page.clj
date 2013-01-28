@@ -2,11 +2,11 @@
   (:require [sicpclojure.config :as config])
   (:require [hiccup.core :refer [html]])
   (:require [hiccup.page :refer [html5]])
-  (:use [sicpclojure.templates.base :exclude [render head header]]))
+  (:use [sicpclojure.templates.base :exclude [render head]]))
 
 (def head (make-head "../static/"))
 
-(defn make-header [page]
+(defn make-header [contents page]
   (let [prev-page (if (< (dec page) (first (config/build :complete)))
                     "../index.html"
                     (str (dec page) ".html"))
@@ -18,10 +18,10 @@
       [:a {:href prev-page} "Prev"]
       " | "
       (when next-page [:a {:href next-page} "Next"])]
-     [:p "+ Contents"]
+     [:p contents]
      [:p#colorscheme ]]))
 
-(defn render [content page] 
+(defn render [contents content page] 
   (html5
    (let [title (head :title)
          js    (head :js)
@@ -33,5 +33,5 @@
        css
        fonts])
     [:body
-      (make-header page)
+      (make-header contents page)
       [:div.content content]]))
