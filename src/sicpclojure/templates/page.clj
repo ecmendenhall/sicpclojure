@@ -19,20 +19,22 @@
       " | "
       (when next-page [:a {:href next-page} "Next"])]
      [:p [:a {:href "contents.html"} "Contents"]]
-     [:p contents]
+     contents
      [:p#colorscheme ]]))
 
 (defn render [contents content page] 
-  (html5
+  (html5 {:lang "en"}
    (let [title (head :title)
          js    (head :js)
          css   (head :css)
          fonts (head :fonts)] 
-    [:head 
+    [:head
+      [:meta {:charset "utf-8"}] 
        title
        js
        css
        fonts])
     [:body
       (make-header contents page)
-      [:div.content content]]))
+      [:div.content 
+       [:div.chaptertext content]]]))

@@ -4,7 +4,7 @@
             :path-to-text "resources/text/"
             :deploy-directory "deploy/"
             :ignore #{".scss"}
-            :complete [10 11 12]})
+            :complete [8 9 10 11 12 13 14 15]})
 
 (def templates {:css   ["style.css"
                         "solarized_light.css"]

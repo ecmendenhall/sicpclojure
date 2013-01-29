@@ -52,6 +52,9 @@ h1, h2, h3 {
 code {
   font-family: "Ubuntu Mono", "Monaco", monospace; }
 
+pre {
+  margin-left: 2em; }
+
 .title h1 {
   font-size: 400%; }
 
@@ -59,7 +62,8 @@ code {
   margin-bottom: 3em; }
 
 header {
-  width: 300px;
+  line-height: 1em;
+  width: 260px;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -70,11 +74,14 @@ header > ul {
   padding-left: 0px; }
 
 .content {
-  margin-left: 300px;
+  margin-left: 260px;
   padding-top: 40px;
-  padding-left: 5%;
-  margin-right: 10%;
+  padding-left: 10%;
+  margin-right: 20%;
   position: relative; }
+
+.chaptertext {
+  line-height: 1.5em; }
 
 .h1 {
   font-size: 14pt; }
@@ -91,7 +98,7 @@ header > ul {
 
 #colorscheme {
   cursor: pointer;
-  text-decoratioN: underline; }
+  text-decoration: underline; }
 
 #toc .h1 {
   font-size: 18pt; }

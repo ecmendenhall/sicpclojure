@@ -37,12 +37,13 @@
 (def head (make-head (config/templates :static-dir)))
 
 (defn render [contents content] 
-  (html5
+  (html5 {:lang "en"}
    (let [title (head :title)
          js    (head :js)
          css   (head :css)
          fonts (head :fonts)] 
-    [:head 
+    [:head
+     [:meta {:charset "utf-8"}] 
        title
        js
        css
@@ -50,6 +51,6 @@
     [:body
       [:header 
        [:p "<Prev  Next>"]
-       [:p contents]
+       contents
        [:p#colorscheme]]
       [:div.content content]]))

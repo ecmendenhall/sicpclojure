@@ -12,12 +12,13 @@
       [:p "&#8212;Rich Hickey, author, Clojure programming language"]]))
 
 (defn render [] 
-  (html5
+  (html5 {:lang "en"}
    (let [title (head :title)
          js    (head :js)
          css   (head :css)
          fonts (head :fonts)] 
-    [:head 
+    [:head
+      [:meta {:charset "utf-8"}]
        title
        js
        css

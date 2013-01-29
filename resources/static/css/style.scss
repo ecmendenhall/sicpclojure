@@ -31,71 +31,103 @@ $green:     #859900;
 }
 /* light is default mode, so pair with general html definition */
 html, .light { @include rebase($base3,$base2,$base1,$base0,$base00,$base01,$base02,$base03)}
+
 .dark  {
     @include rebase($base03,$base02,$base01,$base00,$base0,$base1,$base2,$base3)
 }
+
 .dark { @include accentize($cyan, $yellow); }
+
 html * {
     @include accentize($red, $blue);
     color-profile: sRGB;
     rendering-intent: auto;
 }
+
 body {
     font-family: 'Lora', 'Georgia', serif;
     font-size: 14pt;
     }
+
 h1, h2, h3 {
     font-weight: 800;
 }
+
 code {
     font-family: 'Ubuntu Mono', 'Monaco', monospace;
-    }
+}
+
+pre {
+    margin-left: 2em;
+}
+
 .title  h1 { font-size: 400%; }
-.quote { margin-bottom: 3em; }
+
+.quote {
+    margin-bottom: 3em;
+}
+
+$headerwidth: 260px;
+
 header {
-    width: 300px;
+    line-height: 1em;
+    width: $headerwidth;
     position: fixed;
     top: 0;
     bottom: 0;
     padding: 40px;
 }
+
 header > ul {
     list-style-type: none;
     padding-left: 0px;
 }
+
 .content {
-    margin-left: 300px;
+    margin-left: $headerwidth;
     padding-top: 40px;
-    padding-left: 5%;
-    margin-right: 10%;
+    padding-left: 10%;
+    margin-right: 20%;
     position: relative;
 }
+
+.chaptertext {
+    line-height: 1.5em;
+}
+
 .h1 {
     font-size: 14pt;
 }
+
 .h2 {
     font-size: 12pt;
     padding-left: 10px;
     padding-top: 5px;
 }
+
 .h3 {
     font-size: 10pt;
     padding-left: 20px;
     padding-top: 5px;
 }
+
 #colorscheme {
     cursor: pointer;
-    text-decoratioN: underline;
+    text-decoration: underline;
 }
+
 #toc .h1 {
     font-size: 18pt;
 }
+
 #toc .h2 {
     font-size: 16pt;
 }
+
 #toc .h3 {
     font-size: 14pt;
 }
+
 #toc > ul {
     list-style-type: none;
     padding-left: 0px;
