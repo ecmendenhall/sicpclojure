@@ -1,18 +1,21 @@
-#About
+#SICP in Clojure
+
+##About
 This is a version of the classic [_Structure and Interpretation of Computer Programs_](http://mitpress.mit.edu/sicp/)
 by Hal Abelson and Jerry &amp; Julie Sussman, revised with code examples in [Clojure](http://clojure.org) instead
 of the original [Scheme](http://en.wikipedia.org/wiki/Scheme_\(programming_language\)).
 
-#Read
+##Read
 If you'd just like to read the book, [visit the site here](http://ecmendenhall.github.com/sicpclojure). 
 
-#Contribute
+##Contribute
 The [code samples](https://github.com/ecmendenhall/sicpclojure/tree/master/resources/code) and 
 [chapter text](https://github.com/ecmendenhall/sicpclojure/tree/master/resources/text) are available
 in this repository, so you can contribute to the project yourself. If you see an example that could be improved, 
 want to add a footnote or aside about Clojure, or want to jump in and edit one of the uncompleted chapters, 
 please make a fix and submit a pull request.
 
+###Editing guidelines
 The source text is in the `resources/text` directory, with filenames corresponding to the pages of the original book's
 [website](http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-1.html). These files are all in standard 
 [markdown](http://daringfireball.net/projects/markdown/), with three extra elements:
@@ -82,6 +85,8 @@ using `.png` images drawn up with Google Docs, but make your own however you'd l
 [Ubuntu Mono](http://font.ubuntu.com/) and colors are from the [Solarized](http://ethanschoonover.com/solarized) 
 color scheme. Transparent backgrounds work best.
 
+
+###Previewing your edits
 I haven't packaged this as a library, and probably won't, but if you want to check out your extra-escaped backslashes
 or simply admire your handiwork, it's pretty easy to run it through the site generator from the REPL:
 
@@ -108,7 +113,7 @@ Slurp `src/sicpclojure/core.clj` into your REPL, then:
 This will generate the page and start a simple Jetty server. Your edits should now be available as beautiful 
 full-color HTML via localhost:3000.
 
-#License
+##License
 The SICP text is licensed under a Creative Commons [BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/) license
 (so the source text in this repository is too). My code is released under an MIT license. If you would like to read
 one, see the file [LICENSE.md](https://github.com/ecmendenhall/sicpclojure/blob/master/LICENSE.md)!
