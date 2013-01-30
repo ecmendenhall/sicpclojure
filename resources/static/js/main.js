@@ -1,10 +1,8 @@
-require(["http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"]
-);
+require(["mathjax"], function(mjsettings) {
+    mjsettings.injectConfig(mjsettings.mathJaxConfig);
+    mjsettings.mathJaxDefaults();
+});
 
 require(["highlight.pack"], function(hljs) {
     hljs.initHighlighting();
-});
-
-require(["colorscheme"], function(colorscheme) {
-    colorscheme.getColorPreference();
 });

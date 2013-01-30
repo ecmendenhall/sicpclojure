@@ -2,18 +2,22 @@
   (:require [sicpclojure.config :as config])
   (:require [hiccup.core :refer [html]])
   (:require [hiccup.page :refer [html5]])
-  (:use [sicpclojure.templates.base :exclude [render head]]))
+  (:use [sicpclojure.templates.base :exclude [render head footer]]))
 
 (def head (make-head "../static/"))
+(def footer (make-footer "../static/"))
 
-(defn make-header [contents page]
+(defn make-nav 
+  "Takes a Hiccup vector as page contents and a page number. Generates a Hiccup :nav
+  element based on the number of completed pages listed in config/build."
+  [contents page]
   (let [prev-page (if (< (dec page) (first (config/build :complete)))
                     "../index.html"
                     (str (dec page) ".html"))
         next-page (if (> (inc page) (last (config/build :complete)))
                     false
                     (str (inc page) ".html"))]
-    [:header 
+    [:nav 
      [:p 
       [:a {:href prev-page} "Prev"]
       " | "
@@ -35,6 +39,8 @@
        css
        fonts])
     [:body
-      (make-header contents page)
-      [:div.content 
-       [:div.chaptertext content]]]))
+     [:div.sidebar
+      (make-nav contents page)
+      [:footer footer]]
+     [:div.content 
+      [:div.chaptertext content]]]))

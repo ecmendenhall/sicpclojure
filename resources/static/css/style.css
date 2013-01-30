@@ -1,3 +1,237 @@
+/* HTML5 Boilerplate
+ * ==|== normalize.css ==========================================================
+ */
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+  display: block; }
+
+audio, canvas, video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1; }
+
+audio:not([controls]), [hidden] {
+  display: none; }
+
+html {
+  font-size: 100%;
+  overflow-y: scroll;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.231;
+  font-family: sans-serif;
+  color: #222; }
+
+button, input, select, textarea {
+  font-family: sans-serif;
+  color: #222; }
+
+a {
+  color: #00e; }
+  a:visited {
+    color: #551a8b; }
+  a:hover {
+    color: #06e; }
+  a:focus {
+    outline: thin dotted; }
+  a:hover, a:active {
+    outline: 0; }
+
+abbr[title] {
+  border-bottom: 1px dotted; }
+
+b, strong {
+  font-weight: bold; }
+
+blockquote {
+  margin: 1em 40px; }
+
+dfn {
+  font-style: italic; }
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #cccccc;
+  margin: 1em 0;
+  padding: 0; }
+
+ins {
+  background: #ff9;
+  color: #000;
+  text-decoration: none; }
+
+mark {
+  background: #ff0;
+  color: #000;
+  font-style: italic;
+  font-weight: bold; }
+
+pre, code, kbd, samp {
+  font-family: monospace, monospace;
+  _font-family: "courier new", monospace;
+  font-size: 1em; }
+
+pre {
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word; }
+
+q {
+  quotes: none; }
+  q:before, q:after {
+    content: "";
+    content: none; }
+
+small {
+  font-size: 85%; }
+
+sub {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+  top: -0.5em; }
+
+sub {
+  bottom: -0.25em; }
+
+ul, ol {
+  margin: 1em 0;
+  padding: 0 0 0 40px; }
+
+dd {
+  margin: 0 0 0 40px; }
+
+nav ul, nav ol {
+  list-style: none;
+  list-style-image: none;
+  margin: 0;
+  padding: 0; }
+
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+  vertical-align: middle; }
+
+svg:not(:root) {
+  overflow: hidden; }
+
+figure, form {
+  margin: 0; }
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0; }
+
+label {
+  cursor: pointer; }
+
+legend {
+  border: 0;
+  *margin-left: -7px;
+  padding: 0; }
+
+button, input, select, textarea {
+  font-size: 100%;
+  margin: 0;
+  vertical-align: baseline;
+  *vertical-align: middle; }
+
+button, input {
+  line-height: normal;
+  *overflow: visible; }
+
+table button, table input {
+  *overflow: auto; }
+
+button {
+  cursor: pointer;
+  -webkit-appearance: button; }
+
+input[type="button"], input[type="reset"], input[type="submit"] {
+  cursor: pointer;
+  -webkit-appearance: button; }
+input[type="checkbox"], input[type="radio"] {
+  box-sizing: border-box; }
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box; }
+  input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none; }
+
+button::-moz-focus-inner, input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+textarea {
+  overflow: auto;
+  vertical-align: top;
+  resize: vertical; }
+
+input:invalid, textarea:invalid {
+  background-color: #f0dddd; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+td {
+  vertical-align: top; }
+
+/* ==|== non-semantic helper classes ======================================== */
+.ir {
+  display: block;
+  border: 0;
+  text-indent: -999em;
+  overflow: hidden;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  text-align: left;
+  direction: ltr; }
+  .ir br {
+    display: none; }
+
+.hidden {
+  display: none !important;
+  visibility: hidden; }
+
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+  .visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto; }
+
+.invisible {
+  visibility: hidden; }
+
+body {
+  font-family: "Helvetica", Arial, sans-serif; }
+
 /* light is default mode, so pair with general html definition */
 html, .light {
   background-color: #fdf6e3;
@@ -10,6 +244,121 @@ html, .light {
   html a, html a:active, html a:visited, .light a, .light a:active, .light a:visited {
     color: #586e75; }
 
+html, .light {
+  /*Original Style from ethanschoonover.com/solarized (c) Jeremy Hull <sourdrums@gmail.com>*/ }
+  html pre code, .light pre code {
+    display: block;
+    padding: 0.5em;
+    background: #fdf6e3;
+    color: #657b83; }
+  html pre .comment,
+  html pre .template_comment,
+  html pre .diff .header,
+  html pre .doctype,
+  html pre .pi,
+  html pre .lisp .string,
+  html pre .javadoc, .light pre .comment,
+  .light pre .template_comment,
+  .light pre .diff .header,
+  .light pre .doctype,
+  .light pre .pi,
+  .light pre .lisp .string,
+  .light pre .javadoc {
+    color: #93a1a1;
+    font-style: italic; }
+  html pre .keyword,
+  html pre .winutils,
+  html pre .method,
+  html pre .addition,
+  html pre .css .tag,
+  html pre .request,
+  html pre .status,
+  html pre .nginx .title, .light pre .keyword,
+  .light pre .winutils,
+  .light pre .method,
+  .light pre .addition,
+  .light pre .css .tag,
+  .light pre .request,
+  .light pre .status,
+  .light pre .nginx .title {
+    color: #859900; }
+  html pre .number,
+  html pre .command,
+  html pre .string,
+  html pre .tag .value,
+  html pre .phpdoc,
+  html pre .tex .formula,
+  html pre .regexp,
+  html pre .hexcolor, .light pre .number,
+  .light pre .command,
+  .light pre .string,
+  .light pre .tag .value,
+  .light pre .phpdoc,
+  .light pre .tex .formula,
+  .light pre .regexp,
+  .light pre .hexcolor {
+    color: #2aa198; }
+  html pre .title,
+  html pre .localvars,
+  html pre .chunk,
+  html pre .decorator,
+  html pre .built_in,
+  html pre .identifier,
+  html pre .vhdl .literal,
+  html pre .id, .light pre .title,
+  .light pre .localvars,
+  .light pre .chunk,
+  .light pre .decorator,
+  .light pre .built_in,
+  .light pre .identifier,
+  .light pre .vhdl .literal,
+  .light pre .id {
+    color: #268bd2; }
+  html pre .attribute,
+  html pre .variable,
+  html pre .lisp .body,
+  html pre .smalltalk .number,
+  html pre .constant,
+  html pre .class .title,
+  html pre .parent,
+  html pre .haskell .type, .light pre .attribute,
+  .light pre .variable,
+  .light pre .lisp .body,
+  .light pre .smalltalk .number,
+  .light pre .constant,
+  .light pre .class .title,
+  .light pre .parent,
+  .light pre .haskell .type {
+    color: #b58900; }
+  html pre .preprocessor,
+  html pre .preprocessor .keyword,
+  html pre .shebang,
+  html pre .symbol,
+  html pre .symbol .string,
+  html pre .diff .change,
+  html pre .special,
+  html pre .attr_selector,
+  html pre .important,
+  html pre .subst,
+  html pre .cdata,
+  html pre .clojure .title, .light pre .preprocessor,
+  .light pre .preprocessor .keyword,
+  .light pre .shebang,
+  .light pre .symbol,
+  .light pre .symbol .string,
+  .light pre .diff .change,
+  .light pre .special,
+  .light pre .attr_selector,
+  .light pre .important,
+  .light pre .subst,
+  .light pre .cdata,
+  .light pre .clojure .title {
+    color: #cb4b16; }
+  html pre .deletion, .light pre .deletion {
+    color: #dc322f; }
+  html pre .tex .formula, .light pre .tex .formula {
+    background: #eee8d5; }
+
 .dark {
   background-color: #002b36;
   color: #839496; }
@@ -21,7 +370,7 @@ html, .light {
   .dark a, .dark a:active, .dark a:visited {
     color: #93a1a1; }
 
-.dark a, .dark a:active, .dark a:visited, .dark code.url {
+.dark a, .dark a:active, .dark a:visited, .dark a:hover, .dark code.url {
   color: #2aa198; }
 .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
   color: #2aa198; }
@@ -30,10 +379,78 @@ html, .light {
 .dark .quote h1 {
   color: #b58900; }
 
+.dark pre code {
+  display: block;
+  padding: 0.5em;
+  background: #002b36;
+  color: #839496; }
+.dark pre .comment,
+.dark pre .template_comment,
+.dark pre .diff .header,
+.dark pre .doctype,
+.dark pre .pi,
+.dark pre .lisp .string,
+.dark pre .javadoc {
+  color: #586e75;
+  font-style: italic; }
+.dark pre .keyword,
+.dark pre .winutils,
+.dark pre .method,
+.dark pre .addition,
+.dark pre .css .tag,
+.dark pre .request,
+.dark pre .status,
+.dark pre .nginx .title {
+  color: #859900; }
+.dark pre .number,
+.dark pre .command,
+.dark pre .string,
+.dark pre .tag .value,
+.dark pre .phpdoc,
+.dark pre .tex .formula,
+.dark pre .regexp,
+.dark pre .hexcolor {
+  color: #2aa198; }
+.dark pre .title,
+.dark pre .localvars,
+.dark pre .chunk,
+.dark pre .decorator,
+.dark pre .built_in,
+.dark pre .identifier,
+.dark pre .vhdl .literal,
+.dark pre .id {
+  color: #268bd2; }
+.dark pre .attribute,
+.dark pre .variable,
+.dark pre .lisp .body,
+.dark pre .smalltalk .number,
+.dark pre .constant,
+.dark pre .class .title,
+.dark pre .parent,
+.dark pre .haskell .type {
+  color: #b58900; }
+.dark pre .preprocessor,
+.dark pre .preprocessor .keyword,
+.dark pre .shebang,
+.dark pre .symbol,
+.dark pre .symbol .string,
+.dark pre .diff .change,
+.dark pre .special,
+.dark pre .attr_selector,
+.dark pre .important,
+.dark pre .subst,
+.dark pre .cdata,
+.dark pre .clojure .title {
+  color: #cb4b16; }
+.dark pre .deletion {
+  color: #dc322f; }
+.dark pre .tex .formula {
+  background: #073642; }
+
 html * {
   color-profile: sRGB;
   rendering-intent: auto; }
-  html * a, html * a:active, html * a:visited, html * code.url {
+  html * a, html * a:active, html * a:visited, html * a:hover, html * code.url {
     color: #d30102; }
   html * h1, html * h2, html * h3, html * h4, html * h5, html * h6 {
     color: #d30102; }
@@ -44,7 +461,8 @@ html * {
 
 body {
   font-family: "Lora", "Georgia", serif;
-  font-size: 14pt; }
+  font-size: 16pt;
+  padding-bottom: 40px; }
 
 h1, h2, h3 {
   font-weight: 800; }
@@ -61,17 +479,26 @@ pre {
 .quote {
   margin-bottom: 3em; }
 
-header {
-  line-height: 1em;
-  width: 260px;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  padding: 40px; }
+nav {
+  line-height: 1em; }
+
+footer {
+  bottom: 40px;
+  font-size: 12pt; }
+  footer p {
+    margin: 0px; }
 
 header > ul {
   list-style-type: none;
   padding-left: 0px; }
+
+.sidebar {
+  width: 260px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  padding-top: 40px;
+  padding-left: 40px; }
 
 .content {
   margin-left: 260px;
@@ -84,15 +511,15 @@ header > ul {
   line-height: 1.5em; }
 
 .h1 {
-  font-size: 14pt; }
+  font-size: 16pt; }
 
 .h2 {
-  font-size: 12pt;
+  font-size: 14pt;
   padding-left: 10px;
   padding-top: 5px; }
 
 .h3 {
-  font-size: 10pt;
+  font-size: 12pt;
   padding-left: 20px;
   padding-top: 5px; }
 

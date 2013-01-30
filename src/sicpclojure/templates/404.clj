@@ -1,15 +1,13 @@
-(ns sicpclojure.templates.cover
+(ns sicpclojure.templates.404
   (:require [hiccup.core :refer [html]])
   (:require [hiccup.page :refer [html5]])
   (:use [sicpclojure.templates.base :exclude [render]]))
 
 (def content
   (html
-    [:div.title 
-      [:h1 "SICP In Clojure"]]
-    [:div.quote
-      [:h1 "&#8220;I personally don't think SICP will help you much with Clojure. YMMV.&#8221;"]
-      [:p "&#8212;Rich Hickey, author, Clojure programming language"]]))
+    [:h1 "Page not found"]
+    [:p "We can't find the page you requested. If you clicked a link to a later
+        chapter, it might not be ready yet."]))
 
 (defn render [] 
   (html5 {:lang "en"}

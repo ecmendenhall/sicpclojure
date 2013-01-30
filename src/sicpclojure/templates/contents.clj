@@ -2,9 +2,11 @@
   (:require [sicpclojure.config :as config])  
   (:require [hiccup.core :refer [html]])
   (:require [hiccup.page :refer [html5]])
-  (:use [sicpclojure.templates.base :exclude [render head]]))
+  (:use [sicpclojure.templates.base :exclude [render head footer]]))
 
 (def head (make-head "../static/"))
+
+(def footer (make-footer "../static/"))
 
 (defn render [contents] 
   (html5 {:lang "en"}
@@ -19,7 +21,9 @@
        css
        fonts])
     [:body
-      [:header 
+     [:div.sidebar
+      [:nav 
        [:p "| " [:a {:href (str (first (config/build :complete)) ".html")} "Next"]]
        [:p#colorscheme]]
-      [:div {:class "content" :id "toc"} contents]]))
+      [:footer footer]]
+     [:div {:class "content" :id "toc"} contents]]))

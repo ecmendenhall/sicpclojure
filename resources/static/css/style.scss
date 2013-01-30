@@ -1,3 +1,5 @@
+@import "boilerplate";
+
 $base03:    #002b36;
 $base02:    #073642;
 $base01:    #586e75;
@@ -23,20 +25,197 @@ $green:     #859900;
     a, a:active, a:visited { color: $rebase1; }
 }
 @mixin accentize($accent1, $accent2) {
-    a, a:active, a:visited, code.url { color: $accent1; }
+    a, a:active, a:visited, a:hover, code.url { color: $accent1; }
     h1,h2,h3,h4,h5,h6 {color:$accent1;} 
     code {color:$accent2;}
     .quote h1 { color: $accent2; }
     
 }
-/* light is default mode, so pair with general html definition */
-html, .light { @include rebase($base3,$base2,$base1,$base0,$base00,$base01,$base02,$base03)}
+@mixin solarized-light-code {
+    /*Original Style from ethanschoonover.com/solarized (c) Jeremy Hull <sourdrums@gmail.com>*/
+
+    pre code {
+    display: block; padding: 0.5em;
+    background: #fdf6e3; color: #657b83;
+    }
+
+    pre .comment,
+    pre .template_comment,
+    pre .diff .header,
+    pre .doctype,
+    pre .pi,
+    pre .lisp .string,
+    pre .javadoc {
+    color: #93a1a1;
+    font-style: italic;
+    }
+
+    pre .keyword,
+    pre .winutils,
+    pre .method,
+    pre .addition,
+    pre .css .tag,
+    pre .request,
+    pre .status,
+    pre .nginx .title {
+    color: #859900;
+    }
+
+    pre .number,
+    pre .command,
+    pre .string,
+    pre .tag .value,
+    pre .phpdoc,
+    pre .tex .formula,
+    pre .regexp,
+    pre .hexcolor {
+    color: #2aa198;
+    }
+
+    pre .title,
+    pre .localvars,
+    pre .chunk,
+    pre .decorator,
+    pre .built_in,
+    pre .identifier,
+    pre .vhdl .literal,
+    pre .id {
+    color: #268bd2;
+    }
+
+    pre .attribute,
+    pre .variable,
+    pre .lisp .body,
+    pre .smalltalk .number,
+    pre .constant,
+    pre .class .title,
+    pre .parent,
+    pre .haskell .type {
+    color: #b58900;
+    }
+
+    pre .preprocessor,
+    pre .preprocessor .keyword,
+    pre .shebang,
+    pre .symbol,
+    pre .symbol .string,
+    pre .diff .change,
+    pre .special,
+    pre .attr_selector,
+    pre .important,
+    pre .subst,
+    pre .cdata,
+    pre .clojure .title {
+    color: #cb4b16;
+    }
+
+    pre .deletion {
+    color: #dc322f;
+    }
+
+    pre .tex .formula {
+    background: #eee8d5;
+    }
+}
+
+@mixin solarized-dark-code {
+    pre code {
+    display: block; padding: 0.5em;
+    background: #002b36; color: #839496;
+    }
+
+    pre .comment,
+    pre .template_comment,
+    pre .diff .header,
+    pre .doctype,
+    pre .pi,
+    pre .lisp .string,
+    pre .javadoc {
+    color: #586e75;
+    font-style: italic;
+    }
+
+    pre .keyword,
+    pre .winutils,
+    pre .method,
+    pre .addition,
+    pre .css .tag,
+    pre .request,
+    pre .status,
+    pre .nginx .title {
+    color: #859900;
+    }
+
+    pre .number,
+    pre .command,
+    pre .string,
+    pre .tag .value,
+    pre .phpdoc,
+    pre .tex .formula,
+    pre .regexp,
+    pre .hexcolor {
+    color: #2aa198;
+    }
+
+    pre .title,
+    pre .localvars,
+    pre .chunk,
+    pre .decorator,
+    pre .built_in,
+    pre .identifier,
+    pre .vhdl .literal,
+    pre .id {
+    color: #268bd2;
+    }
+
+    pre .attribute,
+    pre .variable,
+    pre .lisp .body,
+    pre .smalltalk .number,
+    pre .constant,
+    pre .class .title,
+    pre .parent,
+    pre .haskell .type {
+    color: #b58900;
+    }
+
+    pre .preprocessor,
+    pre .preprocessor .keyword,
+    pre .shebang,
+    pre .symbol,
+    pre .symbol .string,
+    pre .diff .change,
+    pre .special,
+    pre .attr_selector,
+    pre .important,
+    pre .subst,
+    pre .cdata,
+    pre .clojure .title {
+    color: #cb4b16;
+    }
+
+    pre .deletion {
+    color: #dc322f;
+    }
+
+    pre .tex .formula {
+    background: #073642;
+    } 
+}
+    /* light is default mode, so pair with general html definition */
+    html, .light { 
+        @include rebase($base3,$base2,$base1,$base0,$base00,$base01,$base02,$base03)
+}
+
+html, .light { @include solarized-light-code }
 
 .dark  {
     @include rebase($base03,$base02,$base01,$base00,$base0,$base1,$base2,$base3)
 }
 
 .dark { @include accentize($cyan, $yellow); }
+
+.dark { @include solarized-dark-code }
 
 html * {
     @include accentize($red, $blue);
@@ -46,7 +225,8 @@ html * {
 
 body {
     font-family: 'Lora', 'Georgia', serif;
-    font-size: 14pt;
+    font-size: 16pt;
+    padding-bottom: 40px;
     }
 
 h1, h2, h3 {
@@ -67,15 +247,16 @@ pre {
     margin-bottom: 3em;
 }
 
-$headerwidth: 260px;
+$sidebarwidth: 260px;
 
-header {
+nav {
     line-height: 1em;
-    width: $headerwidth;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    padding: 40px;
+}
+
+footer {
+    bottom: 40px;
+    font-size: 12pt;
+    p { margin: 0px; }
 }
 
 header > ul {
@@ -83,8 +264,17 @@ header > ul {
     padding-left: 0px;
 }
 
+.sidebar {
+    width: $sidebarwidth;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    padding-top: 40px;
+    padding-left: 40px;
+}
+
 .content {
-    margin-left: $headerwidth;
+    margin-left: $sidebarwidth;
     padding-top: 40px;
     padding-left: 10%;
     margin-right: 20%;
@@ -96,17 +286,17 @@ header > ul {
 }
 
 .h1 {
-    font-size: 14pt;
+    font-size: 16pt;
 }
 
 .h2 {
-    font-size: 12pt;
+    font-size: 14pt;
     padding-left: 10px;
     padding-top: 5px;
 }
 
 .h3 {
-    font-size: 10pt;
+    font-size: 12pt;
     padding-left: 20px;
     padding-top: 5px;
 }
