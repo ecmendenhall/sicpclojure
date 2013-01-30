@@ -91,7 +91,7 @@ I haven't packaged this as a library, and probably won't, but if you want to che
 or simply admire your handiwork, it's pretty easy to run it through the site generator from the REPL:
 
 ```
-git clone git@github.com:ecmendenhall/sicpclojure.git
+git clone git://github.com/ecmendenhall/sicpclojure.git 
 cd sicpclojure
 lein deps
 lein repl
