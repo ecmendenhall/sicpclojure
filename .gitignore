@@ -1,0 +1,6 @@
+*.swp
+*.swo
+*.scss
+.DS_Store
+.lein-repl-history
+static/css/.sass-cache
