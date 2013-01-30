@@ -56,18 +56,18 @@
 (def head (make-head (config/templates :static-dir)))
 
 (defn make-footer 
-  "Generates a page footer. Takes a path to the static directory, relative to the
+  "Generates a page footer. Takes a path to the root directory, relative to the
   rendered template."
-  [static-dir] 
+  [root-dir] 
   [:div 
    [:p 
-    [:a {:href ""} "About"]]
+    [:a {:href (str root-dir "about.html")} "About"]]
    [:p
-    [:a {:href "http://creativecommons.org/licenses/by-nc/3.0/"}
-     [:img {:src (str static-dir "img/licensebadge.png")
+    [:a {:href "http://creativecommons.org/licenses/by-sa/3.0/"}
+     [:img {:src (str root-dir "static/img/licensebadge.png")
            :alt "CC-BY-NC 3.0"}]]]])
 
-(def footer (make-footer (config/templates :static-dir)))
+(def footer (make-footer "" ))
 
 (defn render 
   "Returns the rendered Hiccup template as HTML5."

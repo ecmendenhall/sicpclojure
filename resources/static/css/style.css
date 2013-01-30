@@ -370,7 +370,7 @@ html, .light {
   .dark a, .dark a:active, .dark a:visited {
     color: #93a1a1; }
 
-.dark a, .dark a:active, .dark a:visited, .dark a:hover, .dark code.url {
+.dark a, .dark a:active, .dark a:visited, .dark a:hover, .dark code.url, .dark a > em {
   color: #2aa198; }
 .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
   color: #2aa198; }
@@ -450,7 +450,7 @@ html, .light {
 html * {
   color-profile: sRGB;
   rendering-intent: auto; }
-  html * a, html * a:active, html * a:visited, html * a:hover, html * code.url {
+  html * a, html * a:active, html * a:visited, html * a:hover, html * code.url, html * a > em {
     color: #d30102; }
   html * h1, html * h2, html * h3, html * h4, html * h5, html * h6 {
     color: #d30102; }

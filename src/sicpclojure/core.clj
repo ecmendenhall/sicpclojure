@@ -3,6 +3,7 @@
   (:require [sicpclojure.templates.contents :as contents-template])
   (:require [sicpclojure.templates.page :as page-template])
   (:require [sicpclojure.templates.cover :as cover-template])
+  (:require [sicpclojure.templates.about :as about-template])
   (:require [sicpclojure.templates.404 :as notfound-template])
   (:require [clojure.zip :as zip])
   (:require [clojure.java.io :as io])
@@ -20,7 +21,7 @@
   (:import [org.pegdown PegDownProcessor Extensions]))
 
 (defn page-path 
-  "Takes an integer. Returns the path to a chapter page in the directory specified
+  "Takes a page number or string. Returns the path to a chapter page in the directory specified
   in config/build."
   [page]
   (str (config/build :path-to-text)
@@ -210,6 +211,10 @@
   (spit (str (config/build :deploy-directory)
              "404.html")
         (notfound-template/render))
+
+  (spit (str (config/build :deploy-directory)
+             "about.html")
+        (about-template/render (get-page (page-path "about")))) 
   
   ;; Render and spit table of contents
   (spit (str (get-or-mkdir (str (config/build :deploy-directory)
@@ -244,15 +249,24 @@
 
 (defn serve-and-watch
   "Starts a simple Jetty server on port 3000, serving files from the deploy directory.
-  Then watches the given directories for changes."
-  [directories]
+  Then watches the given directories for changes. If no directories are passed in, just
+  starts the server."
+  ([]
+   (defroutes dev-handler
+   (route/files "/" {:root "deploy"}))
+   (run-jetty dev-handler {:port 3000 :join? false}))
+
+  ([directories]
   (defroutes dev-handler
    (route/files "/" {:root "deploy"}))
   (run-jetty dev-handler {:port 3000 :join? false})
-  (watch directories))
+  (watch directories)))
 
 (defn deploy-and-serve 
   "Deploys, then starts the dev server and watches the given directories."
-  [dir]
-  (deploy!)
-  (serve-and-watch dir))
+  ([]
+   (deploy!)
+   (serve-and-watch))
+  ([dir]
+   (deploy!)
+   (serve-and-watch dir)))

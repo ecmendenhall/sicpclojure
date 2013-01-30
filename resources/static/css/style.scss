@@ -25,7 +25,7 @@ $green:     #859900;
     a, a:active, a:visited { color: $rebase1; }
 }
 @mixin accentize($accent1, $accent2) {
-    a, a:active, a:visited, a:hover, code.url { color: $accent1; }
+    a, a:active, a:visited, a:hover, code.url, a > em { color: $accent1; }
     h1,h2,h3,h4,h5,h6 {color:$accent1;} 
     code {color:$accent2;}
     .quote h1 { color: $accent2; }

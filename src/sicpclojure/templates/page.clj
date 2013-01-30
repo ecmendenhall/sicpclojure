@@ -5,7 +5,7 @@
   (:use [sicpclojure.templates.base :exclude [render head footer]]))
 
 (def head (make-head "../static/"))
-(def footer (make-footer "../static/"))
+(def footer (make-footer "../"))
 
 (defn make-nav 
   "Takes a Hiccup vector as page contents and a page number. Generates a Hiccup :nav

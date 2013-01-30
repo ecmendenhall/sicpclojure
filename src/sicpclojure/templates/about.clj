@@ -1,4 +1,4 @@
-(ns sicpclojure.templates.page
+(ns sicpclojure.templates.about
   (:require [sicpclojure.config :as config])
   (:require [hiccup.core :refer [html]])
   (:require [hiccup.page :refer [html5]])

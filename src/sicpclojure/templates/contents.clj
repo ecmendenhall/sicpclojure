@@ -6,7 +6,7 @@
 
 (def head (make-head "../static/"))
 
-(def footer (make-footer "../static/"))
+(def footer (make-footer "../"))
 
 (defn render [contents] 
   (html5 {:lang "en"}
