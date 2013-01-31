@@ -47,4 +47,5 @@
       (make-nav contents page)
       [:footer footer]]
      [:div.content
+      [:a {:href (page-src page) :class "text-source-link"} "Page text"]
       [:div.chaptertext content]]]))

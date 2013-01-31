@@ -52,7 +52,7 @@ which the interpreter would readily evaluate to be 57.
 ```
 
 These correspond to `.clj` files in `resources/code`. Code blocks are labeled sequentially according to their
-location in the text: the third figure in section 1.1.7 is `1.1.7.3.clj`.
+location in the text, e.g., the third figure in section 1.1.7 is `1.1.7.3.clj`.
 
 **Math** uses [MathJax](http://www.mathjax.org/) syntax, which includes most of your favorite 
 [LaTex symbols](http://docs.mathjax.org/en/latest/tex.html#supported-latex-commands). Blocks of math are wrapped
@@ -77,7 +77,7 @@ where \\( \phi = (1 + \sqrt{5})/2 \\) Hint: Let \\( \psi= (1 - \sqrt{5}) / {2} \
 ```
 
 Be careful! You'll need to escape any characters that are also markdown symbols with a backslash.
-The most common are the underscore ("k sub one" is `\\( k\_{1} \\)`, and the double-backslash,
+The most common are the underscore ("k sub one" is thus `\\( k\_{1} \\)`), and the double-backslash,
 used to separate rows in a matrix or system of equations (so `\\` becomes `\\\\`).
 I usually use this MathJax [test site](http://advisors-online.com/tex_field.html) for reference, then
 add the extra escape characters.
@@ -110,7 +110,7 @@ Open `src/sicpclojure/config.clj` and add the pages you'd like to preview to the
 
 Slurp `src/sicpclojure/core.clj` into your REPL, then:
 ```
-(deploy-and-serve)
+(dev-server)
 ```
 This will generate the page and start a simple Jetty server. Your edits should now be available as beautiful 
 full-color HTML via localhost:3000.

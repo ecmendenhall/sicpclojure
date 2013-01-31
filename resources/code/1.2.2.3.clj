@@ -1,7 +1,7 @@
 (defn count-change 
   [amount]
   
-  (defn first-denomination [kinds-of-coins]
+  (defn first-denom [kinds-of-coins]
     (cond (= kinds-of-coins 1) 1
           (= kinds-of-coins 2) 5
           (= kinds-of-coins 3) 10
@@ -15,7 +15,7 @@
               (= kinds-of-coins 0)) 0
           :else (+ (cc amount (- kinds-of-coins 1))
                    (cc (- amount 
-                          (first-denomination kinds-of-coins))
+                          (first-denom kinds-of-coins))
                        kinds-of-coins))))
   
   (cc amount 5))

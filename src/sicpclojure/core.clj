@@ -58,7 +58,7 @@
                           "blob/master/resources/code/" 
                           filename)
                :target "_blank"
-               :class "view-source hidden"}
+               :class "view-source"}
               "Source"]]])))
 
     (let [code-block-regex 

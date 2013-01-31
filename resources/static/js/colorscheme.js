@@ -68,47 +68,6 @@ function ColorScheme () {
     };
 }
 
-function SourceToggler () {
-
-    this.source_visible = false;
-
-    this.set_text = function (element, text) {
-        console.log(element);
-        if (document.all) {
-            element.innerText = text;
-        } else {
-            element.textContent = text;
-        }
-    };
-
-    this.show_source = function (el) {
-        localStorage.show_source = true;
-    this.source_link = undefined;
-
-        var source_links = document.getElementsByClassName('view-source');
-        for (var i in source_links) {
-            source_links.item(i).setAttribute('class', 'view-source');
-        }
-
-        this.source_visible = true;
-        this.set_text(el, "- Edit");
-
-    };
-
-    this.hide_source = function (el) {
-        localStorage.show_source = false;
-
-        var source_links = document.getElementsByClassName('view-source');
-        for (var i in source_links) {
-            source_links.item(i).setAttribute('class', 'view-source hidden');
-        }
-
-        this.source_visible = false;
-        this.set_text(el, "+ Edit")
-
-    };
-}
-
 if (Modernizr.localstorage) {
     /* contentloaded.js wrapper by Diego Perini (diego.perini at gmail.com) */
     function contentLoaded(win, fn) {
@@ -146,20 +105,8 @@ if (Modernizr.localstorage) {
     }
 
     colorscheme = new ColorScheme();
-    sourcetoggler = new SourceToggler();
     
     contentLoaded(window, function () { 
         colorscheme.getColorPreference();
-        var source_link = document.getElementById('view-source-link');
-        if (localStorage.show_source === "true") {
-            sourcetoggler.show_source(source_link);
-        }
-        source_link.removeAttribute('href');
-        source_link.addEventListener('click', function () {
-            if (sourcetoggler.source_visible) {
-                sourcetoggler.hide_source(source_link);
-            } else {
-                sourcetoggler.show_source(source_link);
-            }});
     });
 }

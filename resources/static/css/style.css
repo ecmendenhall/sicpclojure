@@ -468,8 +468,8 @@ h1, h2, h3 {
   font-weight: 700; }
 
 code {
-  font-size: 13pt;
-  font-family: "Ubuntu Mono", "Monaco", monospace; }
+  font-family: "Ubuntu Mono", "Monaco", monospace;
+  font-size: 14pt; }
 
 pre {
   margin-left: 1em; }
@@ -484,7 +484,8 @@ nav {
   line-height: 1em; }
 
 footer {
-  font-size: 13pt; }
+  font-size: 12pt;
+  margin-bottom: 40px; }
   footer p {
     margin: 0px; }
 
@@ -499,7 +500,7 @@ header > ul {
   bottom: 0;
   padding-top: 40px;
   padding-left: 40px;
-  overflow: scroll; }
+  overflow: auto; }
 
 .content {
   max-width: 650px;
@@ -507,6 +508,17 @@ header > ul {
   padding-top: 40px;
   padding-left: 10%;
   margin-right: 10%; }
+  .content .text-source-link {
+    position: relative;
+    top: -10px;
+    font-family: "Ubuntu Mono", "Monaco", monospace;
+    float: right;
+    opacity: 0;
+    transition: opacity 1s ease;
+    -webkit-transition: opacity 1s ease; }
+
+.content:hover .text-source-link {
+  opacity: 1; }
 
 .chaptertext {
   line-height: 1.5em; }
@@ -526,19 +538,23 @@ header > ul {
 
 .code-div {
   position: relative; }
+  .code-div a {
+    opacity: 0;
+    transition: opacity 1s ease;
+    -webkit-transition: opacity 1s ease; }
+
+.code-div:hover a {
+  opacity: 1; }
 
 .source-link {
   font-family: "Ubuntu Mono", "Monaco", monospace;
+  font-size: 14pt;
   position: absolute;
   padding: 0px;
   margin: 0px;
   right: 1em;
   bottom: .5em;
   z-index: 1; }
-
-.view-source {
-  font-size: 12pt;
-  margin-top: 5px; }
 
 .hidden {
   display: none; }
