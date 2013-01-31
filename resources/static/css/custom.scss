@@ -1,0 +1,172 @@
+@import "grid";
+@import "solarized";
+
+$sixteen: 16pt;
+$fourteen: 14pt;
+$twelve: 12pt;
+
+@mixin scalefonts($base) {
+    body { font-size: $base; }
+    code { font-size: $base; }
+    footer { font-size: $base - 4pt; }
+    .h1 { font-size: $base; }
+    .h2 { font-size: $base - 2pt; }
+    .h3 { font-size: $base - 4pt; }
+    .view-source { font-size: $base - 6pt; }
+    .text-source-link { font-size: $base - 4pt; }
+    #toc .h1 { font-size: $base + 4pt; }
+    #toc .h2 { font-size: $base + 2pt; }
+    #toc .h3 { font-size: $base; }
+}
+
+@include scalefonts($sixteen);
+
+body {
+    margin-top: 2em;
+    font-family: 'Lora', 'Georgia', serif;
+    }
+
+
+@media (min-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 2em;
+        bottom: 0;
+        overflow: auto;
+    }
+}
+
+@media (max-width: 767px) {
+    .sidebar { position:static; }
+    footer { 
+        position: absolute;
+        right: 4em;
+        top: 4em;
+    }
+    
+}
+
+@media (max-width: 480px) {
+    @include scalefonts($twelve);
+}
+
+@media (min-width: 768px) and (max-width: 978px) { 
+    @include scalefonts($fourteen);
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+}
+
+code {
+    font-family: 'Ubuntu Mono', 'Monaco', monospace;
+}
+
+pre {
+    margin-left: 1em;
+}
+
+.title  h1 { font-size: 400%; }
+
+.quote {
+    margin-bottom: 3em;
+}
+
+
+nav {
+    position: relative;
+    line-height: 1em;
+    ul { 
+        list-style-type: none;
+        padding: 0px;
+        margin: 0px;
+    }
+}
+
+footer {
+    p { margin: 0px; }
+}
+
+header > ul {
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+
+.content {
+    max-width: 650px;
+    padding-left: 5%;
+    padding-right: 5%;
+    
+    .text-source-link {
+        position: relative;
+        top: -10px;
+        font-family: 'Ubuntu Mono', 'Monaco', monospace;
+        float: right;
+        opacity: 0;
+        transition: opacity 1s ease;
+        -webkit-transition: opacity 1s ease;
+    }
+}
+
+.content:hover {
+    .text-source-link {
+        opacity: 1;
+    }
+}
+
+.chaptertext {
+    line-height: 1.5em;
+}
+
+
+.h2 {
+    padding-left: 10px;
+    padding-top: 5px;
+}
+
+.h3 {
+    padding-left: 20px;
+    padding-top: 5px;
+}
+
+.code-div {
+    position: relative;
+    a { 
+        opacity: 0;
+        transition: opacity 1s ease;
+        -webkit-transition: opacity 1s ease;
+    }
+}
+
+.code-div:hover {
+    a { 
+        opacity: 1;
+    }
+}
+
+.source-link {
+    font-family: 'Ubuntu Mono', 'Monaco', monospace;
+    position: absolute;
+    padding: 0px;
+    margin: 0px;
+    right: 1em;
+    bottom: -.5em;
+    z-index: 1;
+}
+
+.hidden {
+    display: none;
+}
+#edit {
+    margin-bottom: 0px;
+}
+#colorscheme, #view-source-link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#toc > ul {
+    list-style-type: none;
+    padding-left: 0px;
+}

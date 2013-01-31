@@ -15,15 +15,18 @@
          css   (head :css)
          fonts (head :fonts)] 
     [:head
-      [:meta {:charset "utf-8"}] 
+      [:meta {:charset "utf-8"}]
+      [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}] 
        title
        js
        css
        fonts])
     [:body
-     [:div.sidebar
-      [:nav 
-       [:p "| " [:a {:href (str (first (config/build :complete)) ".html")} "Next"]]
-       [:p#colorscheme]]
-      [:footer footer]]
-     [:div {:class "content" :id "toc"} contents]]))
+     [:div.container
+      [:div.row
+       [:div {:class "sidebar span3"}
+        [:nav 
+         [:p "| " [:a {:href (str (first (config/build :complete)) ".html")} "Next"]]
+         [:p#colorscheme]]
+        [:footer footer]]
+       [:div {:class "content span9 offset3" :id "toc"} contents]]]]))

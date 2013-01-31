@@ -78,16 +78,19 @@
          css   (head :css)
          fonts (head :fonts)] 
     [:head
-     [:meta {:charset "utf-8"}] 
+     [:meta {:charset "utf-8"}]
+     [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}] 
        title
        js
        css
        fonts])
     [:body
-      [:div.sidebar
+     [:div.container
+      [:div.row
+      [:div {:class "sidebar span3"}
         [:nav 
           [:p "<Prev  Next>"]
           contents
           [:p#colorscheme]]
         [:footer footer]]
-      [:div.content content]]))
+      [:div {:class "content span9 offset3"} content]]]]))

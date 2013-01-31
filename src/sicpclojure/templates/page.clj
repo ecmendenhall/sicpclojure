@@ -37,15 +37,18 @@
          css   (head :css)
          fonts (head :fonts)] 
     [:head
-      [:meta {:charset "utf-8"}] 
+      [:meta {:charset "utf-8"}]
+      [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}] 
        title
        js
        css
        fonts])
     [:body
-     [:div.sidebar
-      (make-nav contents page)
-      [:footer footer]]
-     [:div.content
-      [:a {:href (page-src page) :class "text-source-link"} "Page text"]
-      [:div.chaptertext content]]]))
+     [:div.container
+      [:div.row
+        [:div {:class "sidebar span3"}
+          (make-nav contents page)
+          [:footer footer]]
+        [:div {:class "content span9 offset3"}
+        [:a {:href (page-src page) :class "text-source-link"} "Page text"]
+        [:div.chaptertext content]]]]]))
