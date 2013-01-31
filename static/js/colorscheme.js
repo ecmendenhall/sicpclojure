@@ -106,5 +106,7 @@ if (Modernizr.localstorage) {
 
     colorscheme = new ColorScheme();
     
-    contentLoaded(window, function () { colorscheme.getColorPreference(); });
+    contentLoaded(window, function () { 
+        colorscheme.getColorPreference();
+    });
 }
