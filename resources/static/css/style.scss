@@ -17,7 +17,7 @@ $blue:      #268bd2;
 $cyan:      #2aa198;
 $green:     #859900;
 @mixin rebase($rebase03,$rebase02,$rebase01,$rebase00,$rebase0,$rebase1,$rebase2,$rebase3) 
-{
+{   
     background-color:$rebase03;
     color:$rebase0;
     * { color:$rebase0; }
@@ -230,15 +230,16 @@ body {
     }
 
 h1, h2, h3 {
-    font-weight: 800;
+    font-weight: 700;
 }
 
 code {
+    font-size: 13pt;
     font-family: 'Ubuntu Mono', 'Monaco', monospace;
 }
 
 pre {
-    margin-left: 2em;
+    margin-left: 1em;
 }
 
 .title  h1 { font-size: 400%; }
@@ -254,8 +255,7 @@ nav {
 }
 
 footer {
-    bottom: 40px;
-    font-size: 12pt;
+    font-size: 13pt;
     p { margin: 0px; }
 }
 
@@ -271,14 +271,15 @@ header > ul {
     bottom: 0;
     padding-top: 40px;
     padding-left: 40px;
+    overflow: scroll;
 }
 
 .content {
+    max-width: 650px;
     margin-left: $sidebarwidth;
     padding-top: 40px;
     padding-left: 10%;
-    margin-right: 20%;
-    position: relative;
+    margin-right: 10%;
 }
 
 .chaptertext {
@@ -301,7 +302,32 @@ header > ul {
     padding-top: 5px;
 }
 
-#colorscheme {
+.code-div {
+    position: relative;
+}
+
+.source-link {
+    font-family: 'Ubuntu Mono', 'Monaco', monospace;
+    position: absolute;
+    padding: 0px;
+    margin: 0px;
+    right: 1em;
+    bottom: .5em;
+    z-index: 1;
+}
+
+.view-source {
+    font-size: 12pt;
+    margin-top: 5px;
+}
+
+.hidden {
+    display: none;
+}
+#edit {
+    margin-bottom: 0px;
+}
+#colorscheme, #view-source-link {
     cursor: pointer;
     text-decoration: underline;
 }

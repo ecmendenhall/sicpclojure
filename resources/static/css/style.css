@@ -465,13 +465,14 @@ body {
   padding-bottom: 40px; }
 
 h1, h2, h3 {
-  font-weight: 800; }
+  font-weight: 700; }
 
 code {
+  font-size: 13pt;
   font-family: "Ubuntu Mono", "Monaco", monospace; }
 
 pre {
-  margin-left: 2em; }
+  margin-left: 1em; }
 
 .title h1 {
   font-size: 400%; }
@@ -483,8 +484,7 @@ nav {
   line-height: 1em; }
 
 footer {
-  bottom: 40px;
-  font-size: 12pt; }
+  font-size: 13pt; }
   footer p {
     margin: 0px; }
 
@@ -498,14 +498,15 @@ header > ul {
   top: 0;
   bottom: 0;
   padding-top: 40px;
-  padding-left: 40px; }
+  padding-left: 40px;
+  overflow: scroll; }
 
 .content {
+  max-width: 650px;
   margin-left: 260px;
   padding-top: 40px;
   padding-left: 10%;
-  margin-right: 20%;
-  position: relative; }
+  margin-right: 10%; }
 
 .chaptertext {
   line-height: 1.5em; }
@@ -523,7 +524,29 @@ header > ul {
   padding-left: 20px;
   padding-top: 5px; }
 
-#colorscheme {
+.code-div {
+  position: relative; }
+
+.source-link {
+  font-family: "Ubuntu Mono", "Monaco", monospace;
+  position: absolute;
+  padding: 0px;
+  margin: 0px;
+  right: 1em;
+  bottom: .5em;
+  z-index: 1; }
+
+.view-source {
+  font-size: 12pt;
+  margin-top: 5px; }
+
+.hidden {
+  display: none; }
+
+#edit {
+  margin-bottom: 0px; }
+
+#colorscheme, #view-source-link {
   cursor: pointer;
   text-decoration: underline; }
 

@@ -21,8 +21,8 @@
   (:import [org.pegdown PegDownProcessor Extensions]))
 
 (defn page-path 
-  "Takes a page number or string. Returns the path to a chapter page in the directory specified
-  in config/build."
+  "Takes a page number or string. Returns the path to a chapter page in the directory
+  specified in config/build."
   [page]
   (str (config/build :path-to-text)
        page
@@ -38,18 +38,28 @@
     [markdown]
 
     (defn slurp-code-sample
-      "Slurps and returns the given file from the code director in config/build."
+      "Slurps and returns the given file from the code directory in config/build."
       [filename]
       (slurp (str (config/build :path-to-code) 
                   filename)))
 
     (defn get-code 
       "Takes a regex match vector. Gets a code example from the directory specified 
-      in config/build and returns it formatted as a markdown code block."
+      in config/build and returns it formatted as an HTML code block."
       [template-match]
-      (str "```clojure\n" ; Adds class="clojure" to code blocks.
-           (slurp-code-sample (second template-match))
-           "```"))
+      (let [filename (second template-match)]
+      (hiccup/html 
+        [:div {:id filename :class "code-div"}
+         [:pre
+          [:code {:class "clojure"}
+                 (slurp-code-sample filename)]]
+         [:div {:class "source-link"} 
+          [:a {:href (str (config/build :repo-url) 
+                          "blob/master/resources/code/" 
+                          filename)
+               :target "_blank"
+               :class "view-source hidden"}
+              "Source"]]])))
 
     (let [code-block-regex 
           #"\{\{\s*([a-zA-Z0-9]+(?:[\.|-][a-zA-Z0-9]+)*\.clj)\s*\}\}"]
@@ -66,14 +76,19 @@
       to the id #fn(n)."
       [match]
       (let [n (second match)]
-        (str "<sup><a href='#fn" n "' id='r" n "'>" n "</a></sup>")))
+        (hiccup/html [:sup
+             [:a {:href (str "#fn" n)
+                  :id (str "r" n)}
+                  n]])))
 
     (defn generate-footnote
       "Takes a regex match for a markdown footnote and returns a return link to the
       id #r(n)."
       [match]
       (let [n (second match)]
-        (str "<a href='#r" n "' id='fn" n "'>&#8617;</a>")))
+        (hiccup/html [:a {:href (str "#r" n)
+                          :id (str "fn" n)}
+                      "&#8617;"])))
 
     (let [reference-regex #"\[\^fn-([0-9]+)\]" ; Matches [^fn-n]
           footnote-regex #"\[fn-([0-9]+)\]"]   ; Matches [fn-n]
@@ -120,7 +135,7 @@
                               el))
                    hiccup-template))
 
-  (defn just-body 
+  (defn return-body 
     "Takes a hiccup template and returns the body element."
     [hiccup-template]
     (drop 2 (nth hiccup-template 3)))
@@ -134,7 +149,7 @@
        (as-hiccup)
        (add-header-ids)
        (escape)
-       (just-body)))
+       (return-body)))
 
 (defn deploy!
   "Renders templates for static pages and chapter pages listed as complete in 
@@ -247,26 +262,20 @@
                                  (println "Deploying!")
                                  (deploy!)))))
 
-(defn serve-and-watch
-  "Starts a simple Jetty server on port 3000, serving files from the deploy directory.
-  Then watches the given directories for changes. If no directories are passed in, just
-  starts the server."
+(defn serve
+  "Starts a simple Jetty server on port 3000, serving files from the deploy directory."
   ([]
    (defroutes dev-handler
    (route/files "/" {:root "deploy"}))
-   (run-jetty dev-handler {:port 3000 :join? false}))
+   (run-jetty dev-handler {:port 3000 :join? false})))
 
-  ([directories]
-  (defroutes dev-handler
-   (route/files "/" {:root "deploy"}))
-  (run-jetty dev-handler {:port 3000 :join? false})
-  (watch directories)))
 
-(defn deploy-and-serve 
-  "Deploys, then starts the dev server and watches the given directories."
+(defn dev-server 
+  "Deploys, then starts the dev server. Pass in a directory to watch."
   ([]
    (deploy!)
-   (serve-and-watch))
+   (serve))
   ([dir]
    (deploy!)
-   (serve-and-watch dir)))
+   (serve)
+   (watch dir)))

@@ -5,7 +5,11 @@
   (:use [sicpclojure.templates.base :exclude [render head footer]]))
 
 (def head (make-head "../static/"))
+
 (def footer (make-footer "../"))
+
+(defn page-src [page]
+  (str (config/build :repo-url) "blob/master/resources/text/" page ".md"))
 
 (defn make-nav 
   "Takes a Hiccup vector as page contents and a page number. Generates a Hiccup :nav
@@ -24,7 +28,7 @@
       (when next-page [:a {:href next-page} "Next"])]
      [:p [:a {:href "contents.html"} "Contents"]]
      contents
-     [:p#colorscheme ]]))
+     [:p#colorscheme]]))
 
 (defn render [contents content page] 
   (html5 {:lang "en"}
@@ -42,5 +46,5 @@
      [:div.sidebar
       (make-nav contents page)
       [:footer footer]]
-     [:div.content 
+     [:div.content
       [:div.chaptertext content]]]))

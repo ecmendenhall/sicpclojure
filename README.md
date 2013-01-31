@@ -76,9 +76,11 @@ Inline expressions are wrapped in `\\(` and `\\)`:
 where \\( \phi = (1 + \sqrt{5})/2 \\) Hint: Let \\( \psi= (1 - \sqrt{5}) / {2} \\).
 ```
 
-Be careful! You'll need to escape any backslashes that don't precede a word, so separating rows in a matrix or
-system of equations becomes `\\\\` instead of `\\`. I usually use this MathJax 
-[test site](http://advisors-online.com/tex_field.html) for reference.
+Be careful! You'll need to escape any characters that are also markdown symbols with a backslash.
+The most common are the underscore ("k sub one" is `\\( k\_{1} \\)`, and the double-backslash,
+used to separate rows in a matrix or system of equations (so `\\` becomes `\\\\`).
+I usually use this MathJax [test site](http://advisors-online.com/tex_field.html) for reference, then
+add the extra escape characters.
 
 Finally, figures are stored in `resources/static/img/`, with their original labels from the source text. I've been
 using `.png` images drawn up with Google Docs, but make your own however you'd like. Text is in 
