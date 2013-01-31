@@ -8,7 +8,8 @@
             :repo-url "https://github.com/ecmendenhall/sicpclojure/"})        
 
 (def templates {:js    ["modernizr.js"
-                        "colorscheme.js"]
+                        "colorscheme.js"
+                        "analytics.js"]
                 :css   ["style.css"]
                 :fonts [["Lora" 
                           :size [400 700]

@@ -6,5 +6,3 @@ require(["mathjax"], function(mjsettings) {
 require(["highlight.pack"], function(hljs) {
     hljs.initHighlighting();
 });
-
-require(["analytics"]);
