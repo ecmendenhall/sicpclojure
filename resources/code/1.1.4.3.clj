@@ -1,1 +1,1 @@
-(defn <-name-> [<-formal parameters->] <-body->)
+(defn <name> [<formal parameters>] <body>)
