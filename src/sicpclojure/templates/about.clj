@@ -17,10 +17,12 @@
        css
        fonts])
     [:body
-     [:div.sidebar
-      [:nav
-       [:p [:a {:href "pages/contents.html"} "Contents"]]
-       [:p#colorscheme ]] 
-      [:footer footer]]
-     [:div.content 
-      [:div.chaptertext content]]]))
+     [:div.container
+      [:div.row
+       [:div {:class "sidebar span3"}
+        [:nav
+         [:p [:a {:href "pages/contents.html"} "Contents"]]
+         [:p#colorscheme ]] 
+        [:footer footer]]
+       [:div {:class "content span9 offset3"}
+        [:div.chaptertext content]]]]]))
