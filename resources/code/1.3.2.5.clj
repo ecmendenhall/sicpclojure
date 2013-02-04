@@ -1,1 +1,1 @@
-(fn [<formal-parameters>] <body>) 
+(fn [<-formal-parameters->] <-body->) 
