@@ -1,5 +1,5 @@
 (defn f [x y]  
-  ((fn (a b)  
+  ((fn [a b]  
      (+ (* x (square a))  
         (* y b)  
         (* a b)))  

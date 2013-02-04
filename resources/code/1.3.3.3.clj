@@ -6,4 +6,4 @@
           (and (negative? b-value) (positive? a-value))  
            (search f b a)  
           :else  
-           (error "Values are not of opposite sign" a b)))) 
+           (throw (Exception. "Values are not of opposite sign"))))) 
