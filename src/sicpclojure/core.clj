@@ -271,7 +271,8 @@
 
 
 (defn dev-server 
-  "Deploys, then starts the dev server. Pass in a directory to watch."
+  "Deploys, then starts the dev server. Pass in a directory path to watch 
+  it for changes."
   ([]
    (deploy!)
    (serve))
