@@ -1,0 +1,2 @@
+(defn count-leaves [t]  
+  (accumulate <-??-> <-??-> (map <-??-> <-??->)))  
