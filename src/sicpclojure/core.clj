@@ -66,6 +66,15 @@
           ; Finds, e.g. {{ 1.2.3.clj }} and captures filename
       (string/replace markdown code-block-regex get-code)))
 
+  (defn insert-em-dashes 
+    "Replaces double dashes in the given markdown string with escaped em-dashes."
+    [markdown]
+    
+    (let [em-dash-regex 
+          #" -- "]
+      (string/replace markdown em-dash-regex "&mdash;")))
+
+
   (defn process-footnotes 
     "Takes a markdown string. Returns a string with footnote markers [^fn-n] and 
     [fn-n] replaced by corresponding HTML tags."
@@ -143,6 +152,7 @@
   (->> page 
        (slurp)
        (insert-code-blocks)
+       (insert-em-dashes)
        (process-footnotes)
        (markdown-to-html)
        (parse)

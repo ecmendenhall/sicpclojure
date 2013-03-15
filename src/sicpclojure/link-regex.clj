@@ -18,4 +18,4 @@
                               link-regex 
                               replace-links))))
 
-(map fix-links! (map (fn [n] (str "resources/text/" n ".md")) (range 9 39))
+(map fix-links! (map (fn [n] (str "resources/text/" n ".md")) (range 9 39)))

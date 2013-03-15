@@ -4,6 +4,6 @@
         :else  
         (+ (cc amount  
                (except-first-denomination coin-values))  
-            (cc (- amount  
+           (cc (- amount  
                   (first-denomination coin-values))  
-                coin-values))))
+               coin-values))))

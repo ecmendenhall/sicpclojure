@@ -43,11 +43,13 @@
   "Generates a page header including the js, css, and fonts in config/templates."
   [static-dir]
   {:title [:title "SICP in Clojure"]
-           :js    (conj (map (fn [file] (include-local file static-dir include-js))
-                             (config/templates :js))
+           :js    (list (map (fn [url] (include-link url include-js))
+                             ((config/templates :js) :external))
                         [:script {:data-main (str static-dir "js/main")
                                   :type "text/javascript"
-                                  :src (str static-dir "js/require.js")}])
+                                  :src (str static-dir "js/require.js")}] 
+                        (map (fn [file] (include-local file static-dir include-js))
+                             ((config/templates :js) :local)))
            :css   (map (fn [file] (include-local file static-dir include-css)) 
                        (config/templates :css))
            :fonts (map (fn [file] (include-link file include-font)) 

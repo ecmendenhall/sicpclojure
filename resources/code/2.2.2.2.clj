@@ -1,16 +1,16 @@
 (def x (cons (list 1 2) (list 3 4)))  
   
-(count x)  
+=> (count x)  
 3
 
-(count-leaves x)  
+=> (count-leaves x)  
 4  
   
-(list x x)  
+=> (list x x)  
 (((1 2) 3 4) ((1 2) 3 4))  
   
-(count (list x x))  
+=> (count (list x x))  
 2  
   
-(count-leaves (list x x))  
+=> (count-leaves (list x x))  
 8  

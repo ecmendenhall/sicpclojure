@@ -5,5 +5,5 @@
 
 (def squares (list 1 4 9 16 25))  
   
-(nth squares 3)  
+=> (nth squares 3)  
 16  

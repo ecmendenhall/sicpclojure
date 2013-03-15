@@ -5,5 +5,5 @@
 
 (def odds (list 1 3 5 7))  
   
-(count odds)  
+=> (count odds)  
 4
