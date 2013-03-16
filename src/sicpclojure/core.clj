@@ -71,7 +71,7 @@
     [markdown]
     
     (let [em-dash-regex 
-          #" -- "]
+          #"\\--| -- "]
       (string/replace markdown em-dash-regex "&mdash;")))
 
 
