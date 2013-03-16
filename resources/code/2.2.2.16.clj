@@ -1,5 +1,5 @@
 (defn subsets [s]  
-  (if (null? s)  
-      (list nil)  
+  (if (empty? s)  
+      '()  
       (let [more (subsets (cdr s))]  
         (append more (map <-??-> more)))))  
